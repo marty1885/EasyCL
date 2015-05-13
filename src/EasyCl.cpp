@@ -170,8 +170,8 @@ cl_int Software::createBuffer(cl_mem_flags flags, size_t size, void* ptr,int& in
 	}
 	else
 	{
-		buffers.push_back(newBuffer);
 		index = buffers.size();
+		buffers.push_back(newBuffer);
 	}
 	return err;
 

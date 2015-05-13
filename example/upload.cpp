@@ -41,14 +41,14 @@ int main()
 		data[i] = 59;
 
 	program.createBuffer(CL_MEM_READ_WRITE|CL_MEM_COPY_HOST_PTR,128*sizeof(int),NULL,ind);
-	upload.setArg(0,*program.buffers[0]);
+	upload.setArg(0,*program.buffers[ind]);
 
 	upload.setArgBuffer(1,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,16*sizeof(int),data);
 	upload.setArgBuffer(2,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,sizeof(int),&index);
 	upload.enqueueTask();
 
 	copy.setArgBuffer(0,CL_MEM_WRITE_ONLY|CL_MEM_COPY_HOST_PTR,16*sizeof(int),NULL);
-	copy.setArg(1,*program.buffers[0]);
+	copy.setArg(1,*program.buffers[ind]);
 
 	cl::NDRange global(30);
 	cl::NDRange local(1);
