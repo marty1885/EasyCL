@@ -57,6 +57,10 @@ ComputeDevice::ComputeDevice(cl::Device dev,cl::Context con)
 	commandQueue = cl::CommandQueue(context, device);
 }
 
+//////////////////////////////////////////////////////////////////////////
+//ComputeDeviceList							//
+//////////////////////////////////////////////////////////////////////////
+
 bool ComputeDevice::avliable()
 {
 	int inQueueComunt = commandQueue.getInfo<CL_QUEUE_REFERENCE_COUNT>();

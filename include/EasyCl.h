@@ -40,7 +40,7 @@ public:
 	Software(ComputeDevice* dev, SourceCode sou);
 	Software();
 	~Software();
-	int build(std::string options = "");
+	cl_int build(std::string options = "");
 
 	cl_int createBuffer(cl_mem_flags flags, size_t size, void* ptr, int& index);
 	void releaseBuffer(int index);
