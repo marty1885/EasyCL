@@ -41,6 +41,8 @@ public:
 	Software();
 	~Software();
 	cl_int build(std::string options = "");
+	bool good();
+	cl_int getError();
 
 	cl_int createBuffer(cl_mem_flags flags, size_t size, void* ptr, int& index);
 	void releaseBuffer(int index);
@@ -49,6 +51,8 @@ public:
 	SourceCode sourceCode;
 	cl::Program program;
 	std::vector<cl::Buffer*> buffers;
+	bool isGood = false;
+	cl_int errorCode = 0;
 };
 
 class Kernel

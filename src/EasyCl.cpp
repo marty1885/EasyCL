@@ -107,10 +107,18 @@ ComputeDeviceList ComputeDeviceList::findDevice(std::string keyWord,cl_device_ty
 
 Software::Software(ComputeDevice* dev, SourceCode sou)
 {
+	//cl_int err = this->errorCode;
 	device = dev;
 	sourceCode = sou;
 
-	program = cl::Program(device->context, sourceCode.source);
+	program = cl::Program(device->context, sourceCode.source,&errorCode);
+	if(errorCode != CL_SUCCESS)
+	{
+		cout << "Error while creating Software/cl::Program , code " << errorCode << endl;
+		isGood = false;
+	}
+	else
+		isGood = true;
 }
 
 Software::Software()
@@ -144,6 +152,16 @@ cl_int Software::build(string options)
 		return result;
 	}
 	return result;
+}
+
+bool Software::good()
+{
+	return isGood;
+}
+
+cl_int Software::getError()
+{
+	return errorCode;
 }
 
 cl_int Software::createBuffer(cl_mem_flags flags, size_t size, void* ptr,int& index)
