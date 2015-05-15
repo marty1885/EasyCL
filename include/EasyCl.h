@@ -27,11 +27,11 @@ class ComputeDevice
 {
 public:
 	ComputeDevice(cl::Device dev,cl::Context con);
+	bool avliable();
 
 	cl::Device device;
 	cl::Context context;
 	cl::CommandQueue commandQueue;
-	cl_int inUse = false;
 };
 
 class Software//XXX:This is a bad name. But I can come up with a better one.
