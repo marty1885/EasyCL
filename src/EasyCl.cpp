@@ -263,13 +263,15 @@ cl_int Kernel::setArgBuffer(int index, cl_mem_flags flags, size_t size, void* pt
 
 	if(ptr != NULL)
 	{
-		err = software.device->commandQueue.enqueueWriteBuffer(*buffers[index],CL_TRUE,0,size, ptr);
+		cl::Event event;
+		err = software.device->commandQueue.enqueueWriteBuffer(*buffers[index],CL_TRUE,0,size, ptr,NULL,&event);
 		if(err != CL_SUCCESS)
 		{
 			cout << "Error uploading data to device , code " << err << endl;
 			//delete buffers[index];
 			return err;
 		}
+		event.wait();
 	}
 
 

@@ -46,3 +46,7 @@ target_link_libraries(upload EasyCl)
 add_executable(reallySmallRSACrack example/reallySmallRSACrack.cpp)
 target_link_libraries(reallySmallRSACrack ${OPENCL_LIBRARIES})
 target_link_libraries(reallySmallRSACrack EasyCl)
+
+add_executable(classTest example/classTest.cpp)
+target_link_libraries(classTest ${OPENCL_LIBRARIES})
+target_link_libraries(classTest EasyCl)

@@ -1,7 +1,11 @@
 #ifndef EASYCL_H
 #define EASYCL_H
 
-#include <CL/cl.hpp>
+#ifdef __APPLE__
+	#include <OpenCL/opencl.h>
+#else
+	#include <CL/cl.h>
+#endif
 
 #include <vector>
 #include <string>
