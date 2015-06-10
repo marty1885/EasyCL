@@ -4,6 +4,7 @@ project(EasyCl)
 project(example1)
 project(upload)
 project(reallySmallRSACrack)
+project(hugeData)
 
 option(DEBUG_MODE "Enable debug flags an others" OFF)
 
@@ -47,6 +48,10 @@ add_executable(reallySmallRSACrack example/reallySmallRSACrack.cpp)
 target_link_libraries(reallySmallRSACrack ${OPENCL_LIBRARIES})
 target_link_libraries(reallySmallRSACrack EasyCl)
 
-add_executable(classTest example/classTest.cpp)
-target_link_libraries(classTest ${OPENCL_LIBRARIES})
-target_link_libraries(classTest EasyCl)
+add_executable(hugeData example/hugeData.cpp)
+target_link_libraries(hugeData ${OPENCL_LIBRARIES})
+target_link_libraries(hugeData EasyCl)
+
+#add_executable(classTest example/classTest.cpp)
+#target_link_libraries(classTest ${OPENCL_LIBRARIES})
+#target_link_libraries(classTest EasyCl)
