@@ -47,7 +47,7 @@ int main()
 	upload.setArgBuffer(2,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,sizeof(int),&index);
 	upload.enqueueTask();
 
-	copy.setArgBuffer(0,CL_MEM_WRITE_ONLY|CL_MEM_COPY_HOST_PTR,16*sizeof(int),reslut);
+	copy.setArgBuffer(0,CL_MEM_WRITE_ONLY|CL_MEM_ALLOC_HOST_PTR,16*sizeof(int),NULL);;
 	copy.setArg(1,*program.buffers[ind]);
 
 	cl::NDRange global(30);
