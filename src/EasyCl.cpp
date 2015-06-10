@@ -176,7 +176,7 @@ cl_int Software::createBuffer(cl_mem_flags flags, size_t size, void* ptr,int& in
 		}
 
 	cl_int err = 0;
-	cl::Buffer* newBuffer = new cl::Buffer(device->context,flags,size,&err);
+	cl::Buffer* newBuffer = new cl::Buffer(device->context,flags,size,ptr,&err);
 	if(err != CL_SUCCESS)
 	{
 		cout << "Error creating cl::Buffer , code " << err << endl;
@@ -253,7 +253,7 @@ cl_int Kernel::setArgBuffer(int index, cl_mem_flags flags, size_t size, void* pt
 		delete buffers[index];
 
 	cl_int err = 0;
-	buffers[index] = new cl::Buffer(software.device->context, flags,size,&err);
+	buffers[index] = new cl::Buffer(software.device->context,flags,size,ptr,&err);
 
 	if(err != CL_SUCCESS)
 	{

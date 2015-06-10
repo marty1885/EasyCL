@@ -34,7 +34,7 @@ int main()
 	int data[30] = {0};
 	int copy[30] = {50};
 
-	kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR,30*sizeof(int),copy);
+	kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR,30*sizeof(int),copy);
 	kernel.setArgBuffer(1,CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,30*sizeof(int),data);
 
 	cl::NDRange global(30);
