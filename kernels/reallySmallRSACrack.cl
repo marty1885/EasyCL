@@ -7,7 +7,7 @@ __kernel void reallySmallRSACrack(__global int* num, __global int* reasult, __gl
 	int calcNum = squareRoot - id;
 
 	//calcNum > 1 insures no process will find the solution calcNum=1 which is something we don't want.
-	for(int i=id;i<squareRoot;calcNum > 1)
+	for(int i=id;i<squareRoot &&calcNum > 1;)
 	{
 		if(*communicateBuffer == 1)
 			break;
