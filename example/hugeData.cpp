@@ -33,7 +33,7 @@ int main()
 	EasyCl::Kernel kernel(program, "porcess");
 	char* buffer = new char[1920*1080*3];
 
-	kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_ALLOC_HOST_PTR,1920*1080*3,buffer);
+	kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR,1920*1080*3,buffer);
 
 	cl::NDRange global(30);
 	cl::NDRange local(1);

@@ -37,7 +37,7 @@ int main()
 	int communicateBuffer = 0;
 
 	kernel.setArgBuffer(0,CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,sizeof(int),&RSAN);
-	kernel.setArgBuffer(1,CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR,2*sizeof(int),NULL);
+	kernel.setArgBuffer(1,CL_MEM_WRITE_ONLY | CL_MEM_ALLOC_HOST_PTR,2*sizeof(int),NULL);
 	kernel.setArgBuffer(2,CL_MEM_WRITE_ONLY | CL_MEM_COPY_HOST_PTR,sizeof(int),&communicateBuffer);
 
 	kernel.enqueueSPMD();

@@ -242,7 +242,10 @@ Kernel::~Kernel()
 	int argCount = kernel.getInfo<CL_KERNEL_NUM_ARGS>();
 	for(int i=0;i<argCount;i++)
 		if(buffers[i] != NULL && delProtect[i] == false)
+		{
+			cout << this << " -> " << &buffers[i] << " : " << i << endl;
 			delete buffers[i];
+		}
 	delete [] buffers;
 	delete [] delProtect;
 }
