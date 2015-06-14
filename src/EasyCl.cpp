@@ -2,6 +2,7 @@
 
 #include <CL/cl.hpp>
 #include <EasyCl.h>
+#include <fstream>
 
 using namespace EasyCl;
 using namespace std;

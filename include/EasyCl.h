@@ -2,14 +2,13 @@
 #define EASYCL_H
 
 #ifdef __APPLE__
-	#include <OpenCL/opencl.h>
+	#include <OpenCL/opencl.hpp>
 #else
-	#include <CL/cl.h>
+	#include <CL/cl.hpp>
 #endif
 
 #include <vector>
 #include <string>
-#include <fstream>
 
 namespace EasyCl
 {

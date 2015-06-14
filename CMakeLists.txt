@@ -27,7 +27,7 @@ endif()
 
 #setup some debug flags
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} " -std=c++11")
-if(DEBUG_MODE)
+if(DEBUG_MODE)	
 	set(${CMAKE_CXX_FLAGS} " -O3 -ffast-math")
 else()
 	set(${CMAKE_CXX_FLAGS} " -O -g")
@@ -51,6 +51,8 @@ target_link_libraries(reallySmallRSACrack EasyCl)
 add_executable(hugeData example/hugeData.cpp)
 target_link_libraries(hugeData ${OPENCL_LIBRARIES})
 target_link_libraries(hugeData EasyCl)
+
+message(${OPENCL_LIBRARIES})
 
 #add_executable(classTest example/classTest.cpp)
 #target_link_libraries(classTest ${OPENCL_LIBRARIES})

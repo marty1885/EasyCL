@@ -33,31 +33,32 @@ int main()
 	EasyCl::Kernel upload(program, "upload");
 	EasyCl::Kernel copy(program, "copy");
 
-	int data[16] = {0};
-	int reslut[16] = {0};
+	const int uploadSize = 0xffff;
+	int* data = new int[uploadSize];
+	int* reslut = new int[uploadSize];;
 	int index = 0;
 	int ind = 0;
-	for(int i=0;i<16;i++)
-		data[i] = 59;
+	for(int i=0;i<uploadSize;i++)
+		data[i] = 0;
 
-	program.createBuffer(CL_MEM_READ_WRITE|CL_MEM_ALLOC_HOST_PTR,128*sizeof(int),NULL,ind);
+	program.createBuffer(CL_MEM_READ_WRITE|CL_MEM_ALLOC_HOST_PTR,uploadSize*sizeof(int),NULL,ind);
 	upload.setArg(0,*program.buffers[ind]);
 
-	upload.setArgBuffer(1,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,16*sizeof(int),data);
+	upload.setArgBuffer(1,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,128*sizeof(int),data);
 	upload.setArgBuffer(2,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,sizeof(int),&index);
 	upload.enqueueTask();
 
-	copy.setArgBuffer(0,CL_MEM_WRITE_ONLY|CL_MEM_ALLOC_HOST_PTR,16*sizeof(int),NULL);;
+	copy.setArgBuffer(0,CL_MEM_WRITE_ONLY|CL_MEM_ALLOC_HOST_PTR,uploadSize*sizeof(int),NULL);;
 	copy.setArg(1,*program.buffers[ind]);
 
-	cl::NDRange global(30);
+	cl::NDRange global(uploadSize);
 	cl::NDRange local(1);
 	copy.enqueueNDRange(cl::NullRange, global, local);
 
-	copy.readBuffer(0,16*sizeof(int),reslut);
-	for(int i=0;i<16;i++)
+	copy.readBuffer(0,uploadSize*sizeof(int),reslut);
+	/*for(int i=0;i<0xffff;i++)
 		cout << reslut[i] << " ";
-	cout << endl;
+	cout << endl;*/
 
 
 	return 0;

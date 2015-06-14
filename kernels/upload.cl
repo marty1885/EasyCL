@@ -9,11 +9,17 @@ typedef size_t ECLPtr;
 __kernel void upload(__global ECLPtr* storage, __global void* data, __global int* index)
 {
 	storage[*index] = (ECLPtr)data;
+	/*__global int* ptr = (__global int*) storage[*index];
+	for(int i=0;i<0xffff;i++)
+		if(ptr[i] != 0)
+			printf("%d ",ptr[i]);*/
 }
 
 __kernel void copy(__global int* target, __global ECLPtr* source)
 {
 	int id = get_global_id(0);
 	__global int* ptr = (__global int*) source[0];
-	target[id] = ptr[id]+id;
+	target[id] = ptr[id];
+	if(ptr[id] != 0)
+		printf("%d ",ptr[id]);
 }
