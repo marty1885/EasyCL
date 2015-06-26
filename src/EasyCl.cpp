@@ -11,7 +11,7 @@ using namespace std;
 //DeviceManager								//
 //////////////////////////////////////////////////////////////////////////
 
-SourceCode::SourceCode(std::string path)
+SourceCode::SourceCode(string path)
 {
 	load(path);
 }
@@ -20,22 +20,22 @@ SourceCode::SourceCode()
 {
 }
 
-int SourceCode::load(std::string path)
+int SourceCode::load(string path)
 {
 	isGood = false;
 
-	std::ifstream file(path);
+	ifstream file(path);
 	if(file.good() == false)
 	{
 		cout << "Failed to load " << path << " ." << endl;
 		return 0;
 	}
 
-	std::string sourceCode(
-            std::istreambuf_iterator<char>(file),
-            (std::istreambuf_iterator<char>()));
+	string sourceCode(
+            istreambuf_iterator<char>(file),
+            (istreambuf_iterator<char>()));
 
-	source = cl::Program::Sources(1, std::make_pair(sourceCode.c_str(), sourceCode.length()+1));
+	source = cl::Program::Sources(1, make_pair(sourceCode.c_str(), sourceCode.length()+1));
 	code = sourceCode;
 	isGood = true;
 
@@ -87,7 +87,7 @@ ComputeDevice* ComputeDeviceList::defaultDevice(cl_device_type deviceType)
 	return NULL;
 }
 
-ComputeDeviceList ComputeDeviceList::findDevice(std::string keyWord,cl_device_type deviceType)
+ComputeDeviceList ComputeDeviceList::findDevice(string keyWord,cl_device_type deviceType)
 {
 	int deviceCount = devices.size();
 	ComputeDeviceList list;
@@ -95,7 +95,7 @@ ComputeDeviceList ComputeDeviceList::findDevice(std::string keyWord,cl_device_ty
 	{
 		cl_device_type type = devices[i].device.getInfo<CL_DEVICE_TYPE>();
 		if((type & deviceType) || deviceType == CL_DEVICE_TYPE_ALL)
-			if(devices[i].device.getInfo<CL_DEVICE_NAME>().find(keyWord) != std::string::npos)
+			if(devices[i].device.getInfo<CL_DEVICE_NAME>().find(keyWord) != string::npos)
 				list.devices.push_back(devices[i]);
 	}
 
@@ -137,7 +137,7 @@ Software::~Software()
 cl_int Software::build(string options)
 {
 	//HACK: This is a nasty way to make cl::Program::build() only build for one device
-	std::vector<cl::Device> devs;
+	vector<cl::Device> devs;
 	devs.push_back(device->device);
 
 	cl_int result = program.build(devs,options.c_str());
@@ -218,7 +218,7 @@ void Software::releaseBuffer(int index)
 //DeviceManager								//
 //////////////////////////////////////////////////////////////////////////
 
-Kernel::Kernel(Software program, std::string funcName)
+Kernel::Kernel(Software program, string funcName)
 {
 	software = program;
 	cl_int err = 0;
@@ -383,7 +383,7 @@ DeviceManager::DeviceManager()
 		cl_context_properties properties[] =
 			{ CL_CONTEXT_PLATFORM, (cl_context_properties)(platforms[i])(), 0};
 		cl::Context context(CL_DEVICE_TYPE_ALL, properties);
-		std::vector<cl::Device> platformDevice = context.getInfo<CL_CONTEXT_DEVICES>();
+		vector<cl::Device> platformDevice = context.getInfo<CL_CONTEXT_DEVICES>();
 		ComputeDeviceList deviceList;
 		int deviceCount = platformDevice.size();
 
@@ -411,7 +411,7 @@ ComputeDevice* DeviceManager::defaultDevice(cl_device_type deviceType)
 	return NULL;
 }
 
-ComputeDeviceList DeviceManager::findDevice(std::string keyWord,cl_device_type deviceType)
+ComputeDeviceList DeviceManager::findDevice(string keyWord,cl_device_type deviceType)
 {
 	ComputeDeviceList list;
 
