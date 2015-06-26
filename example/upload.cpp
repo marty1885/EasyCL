@@ -44,7 +44,7 @@ int main()
 	program.createBuffer(CL_MEM_READ_WRITE|CL_MEM_ALLOC_HOST_PTR,uploadSize*sizeof(int),NULL,ind);
 	upload.setArg(0,*program.buffers[ind]);
 
-	upload.setArgBuffer(1,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,128*sizeof(int),data);
+	upload.setArgBuffer(1,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,0x100*sizeof(int),data);
 	upload.setArgBuffer(2,CL_MEM_READ_ONLY|CL_MEM_COPY_HOST_PTR,sizeof(int),&index);
 	upload.enqueueTask();
 

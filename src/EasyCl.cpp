@@ -362,7 +362,7 @@ cl_int Kernel::readBuffer(int index, size_t size, void* ptr)
 	err = software.device->commandQueue.enqueueReadBuffer(*buffers[index],CL_TRUE, 0, size, ptr);
 	if(err != CL_SUCCESS)
 	{
-		cout << "Error reading bubber " << index << ", code " << err << endl;
+		cout << "Error reading bufer " << index << ", code " << err << endl;
 		return err;
 	}
 	return err;
