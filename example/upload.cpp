@@ -56,9 +56,6 @@ int main()
 	copy.enqueueNDRange(cl::NullRange, global, local);
 
 	copy.readBuffer(0,uploadSize*sizeof(int),reslut);
-	/*for(int i=0;i<0xffff;i++)
-		cout << reslut[i] << " ";
-	cout << endl;*/
 
 
 	return 0;
