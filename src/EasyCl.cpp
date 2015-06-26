@@ -343,7 +343,8 @@ cl_int Kernel::enqueueSPMD()
 	int maxComputeUnit = software.device->device.getInfo<CL_DEVICE_MAX_COMPUTE_UNITS>();
 	int spmdSize = preferWorkSizeBase*maxComputeUnit;
 	cl::NDRange global(spmdSize);
-	cl::NDRange local(1);
+	cl::NDRange local(maxComputeUnit);
+	//cout << "Base = " << preferWorkSizeBase << " CU = " << maxComputeUnit << endl;
 	cl::Event event;
 	err = software.device->commandQueue.enqueueNDRangeKernel(kernel,cl::NullRange,global,local,NULL,&event);
 	if(err != CL_SUCCESS)
