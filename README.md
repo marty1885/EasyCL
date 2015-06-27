@@ -29,8 +29,8 @@ EasyCL is guarantee to be able to be compiled on GCC/clang with the proper argum
 
 ####Get a OpenCL device
 ```C++
-    EasyCl::DeviceManager deviceManager;
-    EasyCl::ComputeDevice* device = deviceManager.defaultDevice(CL_DEVICE_TYPE_GPU);
+	EasyCl::DeviceManager deviceManager;
+	EasyCl::ComputeDevice* device = deviceManager.defaultDevice(CL_DEVICE_TYPE_GPU);
 ```
 EasyCl::DeviceManager::defaultDevice returns the first device EasyCL finds in the selected category, <br>
 By changine `CL_DEVICE_TYPE_GPU` into `CL_DEVICE_TYPE_CPU` or `CL_DEVICE_TYPE_ACCLERAOR`, it will return  devices in dirrerent category.<br>
@@ -38,7 +38,7 @@ You can also do something like `CL_DEVICE_GPU|CL_DEVICE_CPU` to search in muiltp
 
 ####Loading OpenCL source code.
 ```C++
-    EasyCl::SourceCode sourceCode("someOpenCLCode.cl");
+	EasyCl::SourceCode sourceCode("someOpenCLCode.cl");
 ```
 It's just easy as that<br>
 There is also `bool EasyCl::SourceCode::good()` that tells you weather the loading is success.
@@ -46,8 +46,8 @@ There is also `bool EasyCl::SourceCode::good()` that tells you weather the loadi
 ####Building program
 In OpenCL, after loading your source code. What you wana to do next is to build a program.(compile OpenCL code)<br>
 ```C++
-    EasyCl::Software program(device, sourceCode);
-    program.build();
+	EasyCl::Software program(device, sourceCode);
+	program.build();
 ```
 `int EasyCL::Software::build(std::string options)` returns error code. If it returns `CL_SUCCESS` than the build is success.<br>
 `build()` also take a "option" argument. This is the OpenCL compilation argument. "option" will be driectly passed to OpenCL. EasyCL does not process/use it.<br>
@@ -59,21 +59,21 @@ After building a program, inorder to run it. We have to create what's called a K
 <br>
 So, hot to crate a Kernl in EasyCL? Well...<br>
 ```C++
-    EasyCl::Kernel kernel(program, "kernlNameHere");
+	EasyCl::Kernel kernel(program, "kernlNameHere");
 ```
 
 ####Setting kernl arguments(pass data to kernl)
 To set a Kernel's argument. just do<br>
 ```C++
-    kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR,30*sizeof(int),data);
+	kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR,30*sizeof(int),data);
 ```
 it's declartion is
 ```C++
-    cl_int Kernel::setArgBuffer(int index, cl_mem_flags flags, size_t size, void* ptr);
+	cl_int Kernel::setArgBuffer(int index, cl_mem_flags flags, size_t size, void* ptr);
 ```
 
 where index is the index of whtch argumrnt you want to set on the kernl<br>
-flags is how you want the memory can be accessed. The value is builed up with 2 parts. First reead/write fags, than allocation flags. The r/w flag can be `CL_MEM_WRITE_ONLY`, `CL_MEM_READ_ONLY` or `CL_MEMREAD__WRITE`. The    allocation flag can be `CL_MEM_USE_HOST_PTR`, `CL_MEM_USE_COPY_PTR`, `CL_MEM_ALLOC_HOST_PTR`.<br>
+flags is how you want the memory can be accessed. The value is builed up with 2 parts. First reead/write fags, than allocation flags. The r/w flag can be `CL_MEM_WRITE_ONLY`, `CL_MEM_READ_ONLY` or `CL_MEMREAD__WRITE`. The	allocation flag can be `CL_MEM_USE_HOST_PTR`, `CL_MEM_USE_COPY_PTR`, `CL_MEM_ALLOC_HOST_PTR`.<br>
 size is how big the gargument you want to pass is in bytes.<br>
 ptr is the pointer to the argumant you want to pass.<br>
 <br>
@@ -85,7 +85,7 @@ there are three modes EasyCL and launch a kernel.<br>
 First, the classic NDRange mode. I'm not going to explain that is and how NDRange works here. For more infomation, please visit here [NDRange-Explain].<br>
 To launch a NDRange Kernel. It's very easy. just few lines will do the job.<br>
 ```C++
-    cl::NDRange global(30);
+	cl::NDRange global(30);
 	cl::NDRange local(1);
 	cl::NDRange offset;
 	kernel->enqueueNDRange(offset, global, local);
@@ -95,7 +95,7 @@ To launch a NDRange Kernel. It's very easy. just few lines will do the job.<br>
 A Task means to launch a single threaded Kernel. It's equivalent as `global = 1, loca0 = 1, offset = 0` than do a NDRange. It is NOT paralled.<br>
 To launch a task, please do the flowing
 ```C++
-    kernl.enqueueTask();
+	kernl.enqueueTask();
 ```
 
 #####SPMP
@@ -104,16 +104,16 @@ Or, in layman's terms : It give every core on your device a thread.<br>
 NOTE : SPMD stands for Single Program Muilt data. Not Single Prodessor Multi Data.
 To do a SPMD, do the flowing
 ```C++
-    kernl.enqueueSPMD();
+	kernl.enqueueSPMD();
 ```
 ####Reading data back.
 After dong some computing , you will want to read the result back. To do that, puease do
 ```C++
-    	kernel->readBuffer(0,30*sizeof(int),copy);
+		kernel->readBuffer(0,30*sizeof(int),copy);
 ```
 which is decleared as
 ```C++
-    cl_int Kernel::readBuffer(int index, size_t size, void* ptr)
+	cl_int Kernel::readBuffer(int index, size_t size, void* ptr)
 ```
 which index is the index of the argument you want to read of the Kernl<br>
 size is how much data you want to read back in bytes.<br>
