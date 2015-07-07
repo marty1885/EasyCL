@@ -35,7 +35,8 @@ int SourceCode::load(string path)
             istreambuf_iterator<char>(file),
             (istreambuf_iterator<char>()));
 
-	source = sourceCode;
+	code = sourceCode;
+	source =  cl::Program::Sources(1, make_pair(sourceCode.c_str(), sourceCode.length()+1));
 	isGood = true;
 
 	return 1;

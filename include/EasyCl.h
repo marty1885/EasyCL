@@ -21,7 +21,8 @@ public:
 	int load(std::string path);
 	bool good();
 
-	std::string source;
+	cl::Program::Sources source;
+	std::string code;
 	bool isGood = false;
 };
 

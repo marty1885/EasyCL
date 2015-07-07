@@ -24,7 +24,7 @@ int main()
 	EasyCl::SourceCode sourceCode("kernels/simple.cl");
 	if(sourceCode.good() == false)
 		exit(0);
-	//cout << sourceCode.code << endl;
+	//cout << sourceCode.source << endl;
 
 	EasyCl::Software program(device, sourceCode);
 	if(program.build() != CL_SUCCESS)
