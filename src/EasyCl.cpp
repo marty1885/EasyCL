@@ -1,8 +1,8 @@
 #include <iostream>
+#include <fstream>
 
 #include <CL/cl.hpp>
 #include <EasyCl.h>
-#include <fstream>
 
 using namespace EasyCl;
 using namespace std;
@@ -170,12 +170,6 @@ cl_int Software::createBuffer(cl_mem_flags flags, size_t size, void* ptr,int& in
 {
 	int buffersListSize = buffers.size();
 	int emptyIndex = -1;
-	for(int i=0;i<buffersListSize;i++)
-		if(buffers[i] == NULL)
-		{
-			emptyIndex = i;
-			break;
-		}
 
 	cl_int err = 0;
 	cl::Buffer* newBuffer = new cl::Buffer(device->context,flags,size,ptr,&err);
@@ -194,6 +188,14 @@ cl_int Software::createBuffer(cl_mem_flags flags, size_t size, void* ptr,int& in
 			return err;
 		}
 	}
+
+	//Find a empty place to store data
+	for(int i=0;i<buffersListSize;i++)
+		if(buffers[i] == NULL)
+		{
+			emptyIndex = i;
+			break;
+		}
 
 	if(emptyIndex >= 0)
 	{
