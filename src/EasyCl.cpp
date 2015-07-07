@@ -73,15 +73,15 @@ bool ComputeDevice::avliable()
 ComputeDevice* ComputeDeviceList::defaultDevice(cl_device_type deviceType)
 {
 	if(deviceType == CL_DEVICE_TYPE_ALL)
-		return &devices[0];
+		return devices[0];
 
 	int deviceCount = devices.size();
 	for(int i=0;i<deviceCount;i++)
 	{
-		cl_device_type type = devices[i].device.getInfo<CL_DEVICE_TYPE>();
+		cl_device_type type = devices[i]->device.getInfo<CL_DEVICE_TYPE>();
 		//NOTE: I shouldn't need deviceType == CL_DEVICE_TYPE_ALL here. Just for completeness.
 		if((type & deviceType) != 0 || deviceType == CL_DEVICE_TYPE_ALL)
-			return &devices[i];
+			return devices[i];
 	}
 
 	return NULL;
@@ -93,11 +93,12 @@ ComputeDeviceList ComputeDeviceList::findDevice(string keyWord,cl_device_type de
 	ComputeDeviceList list;
 	for(int i=0;i<deviceCount;i++)
 	{
-		cl_device_type type = devices[i].device.getInfo<CL_DEVICE_TYPE>();
+		cl_device_type type = devices[i]->device.getInfo<CL_DEVICE_TYPE>();
 		if((type & deviceType) || deviceType == CL_DEVICE_TYPE_ALL)
-			if(devices[i].device.getInfo<CL_DEVICE_NAME>().find(keyWord) != string::npos)
+			if(devices[i]->device.getInfo<CL_DEVICE_NAME>().find(keyWord) != string::npos)
 				list.devices.push_back(devices[i]);
 	}
+	cout << list.devices.size() << endl;
 
 	return list;
 }
@@ -390,11 +391,22 @@ DeviceManager::DeviceManager()
 
 		for(int j=0;j<deviceCount;j++)
 		{
-			ComputeDevice device(platformDevice[j],context);
+			ComputeDevice* device = new ComputeDevice(platformDevice[j],context);
 			deviceList.devices.push_back(device);
 		}
 
 		deviceLists.push_back(deviceList);
+	}
+}
+
+DeviceManager::~DeviceManager()
+{
+	int platformCount = deviceLists.size();
+	for(int i=0;i<platformCount;i++)
+	{
+		int deviceNum = deviceLists[i].devices.size();
+		for(int j=0;j<deviceNum;j++)
+			delete deviceLists[i].devices[j];
 	}
 }
 

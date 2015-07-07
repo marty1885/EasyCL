@@ -10,6 +10,7 @@ int main()
 {
 	EasyCl::DeviceManager deviceManager;
 	EasyCl::ComputeDevice* device = deviceManager.defaultDevice(CL_DEVICE_TYPE_GPU);
+					//deviceManager.findDevice("HD",CL_DEVICE_TYPE_GPU).devices[0];
 
 	if(device == NULL)
 	{

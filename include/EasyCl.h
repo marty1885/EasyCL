@@ -79,7 +79,7 @@ public:
 class ComputeDeviceList
 {
 public:
-	std::vector<ComputeDevice> devices;
+	std::vector<ComputeDevice*> devices;
 
 	ComputeDevice* defaultDevice(cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
 	ComputeDeviceList findDevice(std::string keyWord,cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
@@ -91,6 +91,7 @@ public:
 	std::vector<ComputeDeviceList> deviceLists;
 
 	DeviceManager();
+	virtual ~DeviceManager();
 	ComputeDevice* defaultDevice(cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
 	ComputeDeviceList findDevice(std::string keyWord,cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
 };
