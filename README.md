@@ -203,4 +203,10 @@ The following are tested gfx and associated SDK with known or unknown issues. Th
 | -------------------------------------- | :--------: | ----------------------------------------------------------: |
 | Intel i7-4650U CPU @ 1.70GHz (HD 5000) | OpenCL 1.2 | intel_code_builder_for_opencl_mss_2015_5.0.0.93_x64.tgz     |
 
+###Test table
+| Left Aligned | Centered | Right Aligned | Left Aligned | Centered | Right Aligned |
+| :----------- | :------: | ------------: | :----------- | :------: | ------------: |
+| Cell 1       | Cell 2   | Cell 3        | Cell 4       | Cell 5   | Cell 6        |
+| Cell 7       | Cell 8   | Cell 9        | Cell 10      | Cell 11  | Cell 12       |
+
 [NDRange-Explain]: https://www.khronos.org/message_boards/showthread.php/6287-Beginner-question-understanding-NDRange
