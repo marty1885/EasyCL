@@ -193,9 +193,9 @@ OpenCL version:	OpenCL 1.2
 ##Appendix
 ###Supported gfx and SDK
 The following are tested gfx and associated SDK. These suite should run our examples smoothly.
-| gfx                                  | OpenCL     | SDK                                                         |
-| ------------------------------------ | :--------: | ----------------------------------------------------------: |
-| Intel i7-4650U CPU 1.70GHz (HD 5000) | OpenCL 1.2 | intel_code_builder_for_opencl_2015_ubuntu_5.0.0.43_x64.tgz  |
+| gfx                                | OpenCL     | SDK                                                         |
+| ---------------------------------- | :--------: | ----------------------------------------------------------: |
+| Intel i7-4650U CPU 1.70GHz HD 5000 | OpenCL 1.2 | intel_code_builder_for_opencl_2015_ubuntu_5.0.0.43_x64.tgz  |
 
 ###Unsupported gfx and SDK
 The following are tested gfx and associated SDK with known or unknown issues. These suite did not run our examples smoothly.
