@@ -14,8 +14,14 @@ int main()
 
 	if(device == NULL)
 	{
-		cout << "No device avliable. exiting" << endl;
-		exit(0);
+		device = deviceManager.defaultDevice(CL_DEVICE_TYPE_ALL);
+
+		if(device == NULL)
+		{
+			cout << "No device avliable. exiting" << endl;
+			exit(0);
+		}
+
 	}
 
 	cout << "selected device:" << endl;
