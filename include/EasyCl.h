@@ -68,12 +68,13 @@ class Kernel
 public:
 	Kernel(Software program, std::string funcName);
 	virtual ~Kernel();
+
 	cl_int setArgBuffer(int index, cl_mem_flags flags, size_t size, void* ptr);
 	cl_int setArg(int index, cl::Buffer& buf);
+	cl_int readBuffer(int index, size_t size, void* ptr);
 	cl_int enqueueNDRange(cl::NDRange offset, cl::NDRange global, cl::NDRange local);
 	cl_int enqueueTask();
 	cl_int enqueueSPMD();
-	cl_int readBuffer(int index, size_t size, void* ptr);
 
 	Software software;
 	cl::Kernel kernel;
