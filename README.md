@@ -2,6 +2,7 @@
 EasyCL - a library let you access the power of OpenCL easily. <br>
 NOTE : EasyCL does not support images now. But is planned in the near future.<br>
 NOTE : There is currently no plain on supporting OpenGL/Direct3D data access.<br>
+NOTE : Please run doxygen your self. I don't have a good approach to do that in CMake. Sorry.<br>
 
 ##What it does
 Basiclly EasyCL is a library that enables you to build and lunch a OpenCL program in just a few lines of code.<br><br>
