@@ -40,6 +40,7 @@ int SourceCode::load(string path)
 	code = sourceCode;
 	source =  cl::Program::Sources(1, make_pair(sourceCode.c_str(), sourceCode.length()+1));
 	isGood = true;
+	file.close();
 
 	return 1;
 }
@@ -47,6 +48,13 @@ int SourceCode::load(string path)
 bool SourceCode::good()
 {
 	return isGood;
+}
+
+void SourceCode::close()
+{
+	code.clear();
+	source = cl::Program::Sources(1, make_pair((const char*)NULL, 0l));
+	isGood = false;
 }
 
 //////////////////////////////////////////////////////////////////////////

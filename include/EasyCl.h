@@ -18,8 +18,10 @@ class SourceCode
 public:
 	SourceCode(std::string path);
 	SourceCode();
+
 	int load(std::string path);
 	bool good();
+	void close();
 
 	cl::Program::Sources source;
 	std::string code;
@@ -37,12 +39,12 @@ public:
 	cl::CommandQueue commandQueue;
 };
 
-class Software//XXX:This is a bad name. But I can come up with a better one.
+class Software//XXX:This is a bad name. But I can't come up with a better one.
 {
 public:
 	Software(ComputeDevice* dev, SourceCode sou);
 	Software();
-	~Software();
+	virtual ~Software();
 	cl_int build(std::string options = "");
 	bool good();
 	cl_int getError();
@@ -55,6 +57,7 @@ public:
 	cl::Program program;
 	std::vector<cl::Buffer*> buffers;
 	bool isGood = false;
+protected:
 	cl_int errorCode = 0;
 };
 
@@ -62,7 +65,7 @@ class Kernel
 {
 public:
 	Kernel(Software program, std::string funcName);
-	~Kernel();
+	virtual ~Kernel();
 	cl_int setArgBuffer(int index, cl_mem_flags flags, size_t size, void* ptr);
 	cl_int setArg(int index, cl::Buffer& buf);
 	cl_int enqueueNDRange(cl::NDRange offset, cl::NDRange global, cl::NDRange local);
