@@ -83,6 +83,8 @@ public:
 
 	ComputeDevice* defaultDevice(cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
 	ComputeDeviceList findDevice(std::string keyWord,cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
+	ComputeDevice* operator[] (int index);
+	ComputeDevice* operator=(const ComputeDeviceList &list);
 };
 
 class DeviceManager

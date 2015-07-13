@@ -4,6 +4,8 @@
 #include <CL/cl.hpp>
 #include <EasyCl.h>
 
+#include <stdlib.h>
+
 using namespace EasyCl;
 using namespace std;
 
@@ -101,6 +103,16 @@ ComputeDeviceList ComputeDeviceList::findDevice(string keyWord,cl_device_type de
 	cout << list.devices.size() << endl;
 
 	return list;
+}
+
+ComputeDevice* ComputeDeviceList::operator[] (int index)
+{
+	return devices[index];
+}
+
+ComputeDevice* ComputeDeviceList::operator= (const ComputeDeviceList &list)
+{
+	return list.devices[0];
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -378,6 +390,7 @@ cl_int Kernel::readBuffer(int index, size_t size, void* ptr)
 
 DeviceManager::DeviceManager()
 {
+
 	vector<cl::Platform> platforms;
 	cl::Platform::get(&platforms);
 	int platformCount = platforms.size();
@@ -406,9 +419,11 @@ DeviceManager::~DeviceManager()
 	int platformCount = deviceLists.size();
 	for(int i=0;i<platformCount;i++)
 	{
-		int deviceNum = deviceLists[i].devices.size();
+		int deviceNum = deviceLists[i ].devices.size();
 		for(int j=0;j<deviceNum;j++)
+		{
 			delete deviceLists[i].devices[j];
+		}
 	}
 }
 
