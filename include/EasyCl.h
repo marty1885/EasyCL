@@ -25,6 +25,7 @@ public:
 
 	cl::Program::Sources source;
 	std::string code;
+protected:
 	bool isGood = false;
 };
 
@@ -45,6 +46,7 @@ public:
 	Software(ComputeDevice* dev, SourceCode sou);
 	Software();
 	virtual ~Software();
+
 	cl_int build(std::string options = "");
 	bool good();
 	cl_int getError();
@@ -56,9 +58,9 @@ public:
 	SourceCode sourceCode;
 	cl::Program program;
 	std::vector<cl::Buffer*> buffers;
-	bool isGood = false;
 protected:
 	cl_int errorCode = 0;
+	bool isGood = false;
 };
 
 class Kernel
@@ -86,8 +88,7 @@ public:
 
 	ComputeDevice* defaultDevice(cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
 	ComputeDeviceList findDevice(std::string keyWord,cl_device_type deviceType = CL_DEVICE_TYPE_ALL);
-	ComputeDevice* operator[] (int index);
-	ComputeDevice* operator=(const ComputeDeviceList &list);
+	ComputeDevice* operator[] (int index) const;
 };
 
 class DeviceManager

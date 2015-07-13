@@ -108,19 +108,14 @@ ComputeDeviceList ComputeDeviceList::findDevice(string keyWord,cl_device_type de
 			if(devices[i]->device.getInfo<CL_DEVICE_NAME>().find(keyWord) != string::npos)
 				list.devices.push_back(devices[i]);
 	}
-	cout << list.devices.size() << endl;
+	//cout << list.devices.size() << endl;
 
 	return list;
 }
 
-ComputeDevice* ComputeDeviceList::operator[] (int index)
+ComputeDevice* ComputeDeviceList::operator[] (int index) const
 {
 	return devices[index];
-}
-
-ComputeDevice* ComputeDeviceList::operator= (const ComputeDeviceList &list)
-{
-	return list.devices[0];
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -129,7 +124,6 @@ ComputeDevice* ComputeDeviceList::operator= (const ComputeDeviceList &list)
 
 Software::Software(ComputeDevice* dev, SourceCode sou)
 {
-	//cl_int err = this->errorCode;
 	device = dev;
 	sourceCode = sou;
 
