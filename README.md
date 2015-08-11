@@ -6,7 +6,7 @@ NOTE : Please run doxygen your self. I don't have a good approach to do that in 
 
 ##What it does
 Basiclly EasyCL is a library that enables you to build and lunch a OpenCL program in just a few lines of code.<br><br>
-OpenCL or Open Compute Language is the first open, royalty-free standard for cross-platform, parallel programming of modern processors found in personal computers, servers and handheld/embedded devices. OpenCL greatly improves speed and responsiveness for a wide spectrum of applications in numerous market categories from gaming and entertainment to scientific and medical software.<br>
+`OpenCL or Open Compute Language is the first open, royalty-free standard for cross-platform, parallel programming of modern processors found in personal computers, servers and handheld/embedded devices. OpenCL greatly improves speed and responsiveness for a wide spectrum of applications in numerous market categories from gaming and entertainment to scientific and medical software.`<br>
 -Khronos<br>
 <br>
 Although OpenCL is powerful, it's acuatlly a pritty triing job to write the host application code. To solve this issue. EasyCL is created.<br>
