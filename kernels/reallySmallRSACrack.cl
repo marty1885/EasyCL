@@ -16,6 +16,7 @@ __kernel void reallySmallRSACrack(__global int* num, __global int* reasult, __gl
 			*communicateBuffer = 1;
 			reasult[0] = calcNum;
 			reasult[1] = targetNum / calcNum;
+			break;
 		}
 		calcNum -= size;
 		i += size;
