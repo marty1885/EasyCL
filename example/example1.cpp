@@ -10,8 +10,9 @@ int main()
 {
 	EasyCl::DeviceManager deviceManager;
 	//NOTE: there is a possibility where there is no diveoce found and lead to a crash.
-	EasyCl::ComputeDevice* device = //deviceManager.defaultDevice(CL_DEVICE_TYPE_GPU);
-				deviceManager.findDevice("HD",CL_DEVICE_TYPE_GPU)[0];
+	//TODO: Find a elegent way to fix this
+	EasyCl::ComputeDevice* device = deviceManager.defaultDevice(CL_DEVICE_TYPE_GPU);
+				//deviceManager.findDevice("HD",CL_DEVICE_TYPE_GPU)[0];
 
 	if(device == NULL)
 	{
