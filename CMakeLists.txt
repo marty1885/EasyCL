@@ -55,4 +55,4 @@ target_link_libraries(hugeData EasyCl)
 install(TARGETS EasyCl EasyCl DESTINATION /usr/lib)
 install(FILES include/EasyCl.h DESTINATION /usr/include)
 
-message(${OPENCL_LIBRARIES})
+#message(STATUS ${OPENCL_LIBRARIES})
