@@ -1,0 +1,9 @@
+bin/
+build/
+lib/
+CMakeFiles/
+CMakeCache.txt
+*.cmake
+Makefile
+*.so
+*.sh
