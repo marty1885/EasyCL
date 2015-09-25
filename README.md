@@ -65,8 +65,8 @@ So, how to crate a Kernl in EasyCL? Well...<br>
 	EasyCl::Kernel kernel(program, "kernlNameHere");
 ```
 
-####Setting kernl arguments(pass data to kernl)
-To set a Kernel's argument. just do<br>
+####Setting kernl arguments(pass data to kernel)
+To set a  argument to a kernel. just do<br>
 ```C++
 	kernel.setArgBuffer(0,CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR,30*sizeof(int),data);
 ```
