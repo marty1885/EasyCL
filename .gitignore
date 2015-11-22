@@ -7,3 +7,6 @@ CMakeCache.txt
 Makefile
 *.so
 *.sh
+*.exe
+*.dll
+install_*
